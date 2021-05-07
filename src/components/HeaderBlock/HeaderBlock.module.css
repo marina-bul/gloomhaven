@@ -21,7 +21,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 100vh;
+  min-height: 100vh;
   background-image: linear-gradient(
     to top,
     rgba(243, 193, 184, 0.7),

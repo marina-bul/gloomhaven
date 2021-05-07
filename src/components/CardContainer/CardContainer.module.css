@@ -1,0 +1,9 @@
+.cardWrapper {
+  margin: 0;
+  margin-top: 40px;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}

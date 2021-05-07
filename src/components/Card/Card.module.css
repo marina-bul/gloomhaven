@@ -4,13 +4,17 @@
   margin-bottom: 12px;
   cursor: pointer;
   perspective: 1000px;
-  height: 100px;
-  width: 100px;
+  height: 250px;
+  width: 170px;
   margin-right: 12px;
 }
 
-.card:hover .cardInner {
+.sceneName .cardInner {
   transform: rotateY(180deg);
+}
+
+.complited .cardBack {
+  background-color: yellowgreen;
 }
 
 .cardInner {
@@ -21,28 +25,52 @@
   text-align: center;
   transition: transform 0.6s;
   transform-style: preserve-3d;
-  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+  box-shadow: 0 4px 8px 0 rgba(59, 11, 2, 0.7);
 }
 
 .cardFront,
 .cardBack {
+  padding: 0 5px;
   position: absolute;
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
 
 .cardFront {
+  font-size: 32px;
+  font-weight: bold;
   background-color: bisque;
   color: black;
 }
 
 .cardBack {
-  background-color: #1bb95e;
+  background-color: rgb(160, 16, 6);
   color: white;
   transform: rotateY(180deg);
+}
+
+.icon {
+  font-size: 32px;
+  color: rgb(49, 48, 48);
+}
+
+.icon:hover {
+  color: white;
+}
+
+.unvisible {
+  display: none;
+}
+
+.victory {
+  display: block;
+  font-weight: bold;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
