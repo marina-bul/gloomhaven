@@ -1,0 +1,30 @@
+.content {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: bisque;
+}
+
+.wrapper {
+  position: relative;
+  z-index: 1;
+  padding: 100px 16px;
+  max-width: 1024px;
+}
+
+.content h2 {
+  margin: 0;
+  font-size: 60px;
+}
+
+.content p {
+  margin: 0;
+  margin-top: 30px;
+  font-size: 28px;
+  font-style: italic;
+}

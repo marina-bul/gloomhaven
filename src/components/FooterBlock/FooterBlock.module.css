@@ -1,0 +1,35 @@
+.footer {
+  width: 100%;
+  min-height: 100vh;
+
+  background-image: linear-gradient(
+    to top,
+    rgba(59, 11, 2, 0.7),
+    rgba(160, 16, 6, 0.7)
+  );
+}
+
+.copyrightWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.footer p {
+  margin: 0 15px;
+  padding-top: 300px;
+  text-shadow: white 0 0 10px;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.footer span {
+  margin: 0 15px;
+  padding-top: 250px;
+  display: block;
+  text-shadow: white 0 0 15px;
+  font-size: 32px;
+  font-weight: bold;
+}
