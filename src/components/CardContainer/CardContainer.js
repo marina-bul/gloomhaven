@@ -1,9 +1,8 @@
 import React from "react";
-import { scenes } from "../../store";
 import Card from "../Card/Card";
 import s from "./CardContainer.module.css";
 
-const CardContainer = (props) => {
+const CardContainer = ({ scenes }) => {
   return (
     <div className={s.cardWrapper}>
       {scenes.map((el) => (

@@ -1,3 +1,9 @@
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .user {
   margin: 15px 15px;
   padding: 5px 15px;
@@ -18,4 +24,14 @@
 
 .user span {
   font-size: 14px;
+}
+
+.icon {
+  font-size: 20px;
+  color: rgb(88, 6, 6);
+  cursor: pointer;
+}
+
+.icon:hover {
+  color: red;
 }

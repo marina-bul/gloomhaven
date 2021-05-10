@@ -1,14 +1,26 @@
-import React from "react";
+import React, { Component } from "react";
+import { DeleteOutlined } from "@ant-design/icons";
 
 import s from "./Character.module.css";
 
-const Character = (props) => {
-  return (
-    <div className={s.user}>
-      <h4>Имя персонажа</h4>
-      <span>Раса персонажа</span>
-    </div>
-  );
-};
+class Character extends Component {
+  handleOnDelete = () => {
+    this.props.deleteFunc();
+  };
+
+  render() {
+    const { id, name, nation } = this.props;
+
+    return (
+      <div className={s.wrapper}>
+        <div className={s.user}>
+          <h4>{id}</h4>
+          <span>{nation}</span>
+        </div>
+        <DeleteOutlined className={s.icon} onClick={this.handleOnDelete} />
+      </div>
+    );
+  }
+}
 
 export default Character;
