@@ -9,12 +9,12 @@ class Character extends Component {
   };
 
   render() {
-    const { id, name, nation } = this.props;
+    const { name, nation } = this.props;
 
     return (
       <div className={s.wrapper}>
         <div className={s.user}>
-          <h4>{id}</h4>
+          <h4>{name}</h4>
           <span>{nation}</span>
         </div>
         <DeleteOutlined className={s.icon} onClick={this.handleOnDelete} />
