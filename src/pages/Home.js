@@ -7,7 +7,7 @@ import FooterBlock from "../components/FooterBlock/FooterBlock";
 import HeaderBlock from "../components/HeaderBlock/HeaderBlock";
 import CardContainer from "../components/CardContainer/CardContainer";
 import TeamContainer from "../components/TeamContainer/TeamContainer";
-import database from "../services/firebase";
+import firebaseContext from "../services/context/firebaseContext";
 
 class HomePage extends Component {
   state = {
@@ -18,11 +18,9 @@ class HomePage extends Component {
     },
   };
 
-  urlBase = `/team/${this.props.user.uid}`;
-
   componentDidMount() {
-    database
-      .ref("/scenes")
+    const { getTeamUsers, getScenes } = this.context;
+    getScenes()
       .once("value")
       .then((res) => {
         this.setState(
@@ -32,7 +30,7 @@ class HomePage extends Component {
           // this.setNewScene
         );
       });
-    database.ref(this.urlBase).on("value", (res) => {
+    getTeamUsers().on("value", (res) => {
       this.setState({
         team: res.val() || { name: "", users: [] },
       });
@@ -40,13 +38,15 @@ class HomePage extends Component {
   }
 
   deleteItemFunc = (id) => {
+    const { getTeamUsers } = this.context;
     const stateArr = this.state.team.users;
     const newStateArr = stateArr.filter((item) => item.id !== id);
     debugger;
-    database.ref(this.urlBase).set({ users: newStateArr });
+    getTeamUsers().set({ users: newStateArr });
   };
 
   pushItemFunc = (item) => {
+    const { getTeamUsers } = this.context;
     const { team, name, nation } = item;
     const stateArr = this.state.team.users;
 
@@ -55,7 +55,7 @@ class HomePage extends Component {
       name: name,
       nation: nation,
     };
-    database.ref(this.urlBase).set({
+    getTeamUsers().set({
       name: team,
       users: [...stateArr, newUser],
     });
@@ -63,7 +63,6 @@ class HomePage extends Component {
 
   render() {
     const { team, scenes } = this.state;
-    console.log(this.props.user.uid);
     return (
       <>
         <HeaderBlock
@@ -101,5 +100,7 @@ class HomePage extends Component {
     );
   }
 }
+
+HomePage.contextType = firebaseContext;
 
 export default HomePage;

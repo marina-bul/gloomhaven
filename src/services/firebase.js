@@ -12,8 +12,25 @@ const firebaseConfig = {
   appId: "1:293118229181:web:a518058b2573ade37dd5d4",
 };
 
-firebase.initializeApp(firebaseConfig);
-export const fire = firebase;
-const database = fire.database();
+class Firebase {
+  constructor() {
+    firebase.initializeApp(firebaseConfig);
+    this.auth = firebase.auth();
+    this.database = firebase.database();
+    this.userUid = null;
+  }
 
-export default database;
+  setUserUid = (uid) => (this.userUid = uid);
+
+  signInWithEmail = (email, password) =>
+    this.auth.signInWithEmailAndPassword(email, password);
+
+  createUserWithEmail = (email, password) =>
+    this.auth.createUserWithEmailAndPassword(email, password);
+
+  getScenes = () => this.database.ref("/scenes");
+
+  getTeamUsers = () => this.database.ref(`/team/${this.userUid}`);
+}
+
+export default Firebase;

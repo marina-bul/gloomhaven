@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { Layout, Form, Input, Button } from "antd";
 import s from "./Login.module.css";
-import { fire } from "../services/firebase";
+import firebaseContext from "../services/context/firebaseContext";
 
 const { Content } = Layout;
 
 class LoginPage extends Component {
   onFinish = ({ email, password }) => {
-    fire
-      .auth()
-      .signInWithEmailAndPassword(email, password)
+    const { signInWithEmail } = this.context;
+    signInWithEmail(email, password)
       .then((res) => {
         console.log(res);
       })
@@ -19,9 +18,9 @@ class LoginPage extends Component {
         }
       });
   };
-  // onFinishFailed = ({ errorMes }) => {
-  //   console.log(errorMes);
-  // };
+  onFinishFailed = ({ errorMes }) => {
+    console.log(errorMes);
+  };
 
   render() {
     const layout = {
@@ -77,5 +76,7 @@ class LoginPage extends Component {
     );
   }
 }
+
+LoginPage.contextType = firebaseContext;
 
 export default LoginPage;

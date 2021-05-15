@@ -6,6 +6,7 @@ import HomePage from "./pages/Home";
 import { fire } from "./services/firebase";
 import LoginPage from "./pages/Login";
 import RegistrPage from "./pages/Reg";
+import firebaseContext from "./services/context/firebaseContext";
 
 class App extends Component {
   state = {
@@ -13,9 +14,16 @@ class App extends Component {
   };
 
   componentDidMount() {
-    fire.auth().onAuthStateChanged((user) => {
+    const { auth, setUserUid } = this.context;
+    auth.onAuthStateChanged((user) => {
       console.log(user);
-      user ? this.setState({ user }) : this.setState({ user: false });
+      if (user) {
+        setUserUid(user.uid);
+        this.setState({ user });
+      } else {
+        setUserUid(null);
+        this.setState({ user: false });
+      }
     });
   }
 
@@ -49,5 +57,7 @@ class App extends Component {
     );
   }
 }
+
+App.contextType = firebaseContext;
 
 export default App;

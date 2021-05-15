@@ -1,18 +1,16 @@
 import React, { Component } from "react";
 import { Layout, Form, Input, Button } from "antd";
 import s from "./Reg.module.css";
-import { fire } from "../services/firebase";
+import firebaseContext from "../services/context/firebaseContext";
 
 const { Content } = Layout;
 
 class RegistrPage extends Component {
   onFinish = ({ email, password }) => {
-    fire
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((res) => {
-        console.log(res);
-      });
+    const { createUserWithEmail } = this.context;
+    createUserWithEmail(email, password).then((res) => {
+      console.log(res);
+    });
   };
   onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
@@ -75,5 +73,7 @@ class RegistrPage extends Component {
     );
   }
 }
+
+RegistrPage.contextType = firebaseContext;
 
 export default RegistrPage;
