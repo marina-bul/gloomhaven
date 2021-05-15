@@ -1,0 +1,20 @@
+.root {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(105, 4, 4);
+}
+
+.formWrapper {
+  width: 450px;
+  padding: 20px;
+  background-color: bisque;
+  border-radius: 8px;
+}
+
+.formWrapper button {
+  background-color: rgb(105, 4, 4);
+  border-radius: 8px;
+  border-color: rgb(105, 4, 4);
+}
