@@ -7,14 +7,18 @@ const { Content } = Layout;
 
 class LoginPage extends Component {
   onFinish = ({ email, password }) => {
-    const { signInWithEmail } = this.context;
+    const { signInWithEmail, setUserUid } = this.context;
+    const { history } = this.props;
+
     signInWithEmail(email, password)
       .then((res) => {
-        console.log(res);
+        setUserUid(res.user.uid);
+        localStorage.setItem("user", res.user.uid);
+        history.push("/home");
       })
       .catch((error) => {
-        if (error.code == "auth/user-not-found") {
-          this.props.showRegPage();
+        if (error.code === "auth/user-not-found") {
+          history.push("/reg");
         }
       });
   };

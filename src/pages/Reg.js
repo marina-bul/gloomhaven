@@ -8,8 +8,10 @@ const { Content } = Layout;
 class RegistrPage extends Component {
   onFinish = ({ email, password }) => {
     const { createUserWithEmail } = this.context;
+    const { history } = this.props;
     createUserWithEmail(email, password).then((res) => {
-      console.log(res);
+      localStorage.setItem("user", res.user.uid);
+      history.push("/home");
     });
   };
   onFinishFailed = (errorInfo) => {
@@ -30,8 +32,8 @@ class RegistrPage extends Component {
         <Content>
           <div className={s.root}>
             <div className={s.formWrapper}>
-              <span>
-                Пользователь с таким именем не существует. Пройдите регистрацию!
+              <span className={s.head}>
+                Пожалуйста, зарегистрируйте Вашу команду!
               </span>
               <Form
                 {...layout}
