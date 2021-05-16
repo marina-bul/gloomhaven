@@ -1,0 +1,8 @@
+.nav {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: start;
+  background-color: rgb(88, 6, 6);
+  list-style: none;
+}

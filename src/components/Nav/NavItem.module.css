@@ -1,0 +1,17 @@
+.navItem {
+  margin-right: 30px;
+  padding: 20px;
+  font-size: 16px;
+}
+
+.navItem:hover {
+  background-color: rgba(243, 193, 184, 0.7);
+}
+
+.navItem a {
+  color: white;
+}
+
+.navItem a:hover {
+  color: rgb(88, 6, 6);
+}
