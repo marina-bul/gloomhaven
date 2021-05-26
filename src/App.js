@@ -13,30 +13,28 @@ import Nav from "./components/Nav/Nav";
 import NavItem from "./components/Nav/NavItem";
 import { Route, Link, Switch, Redirect } from "react-router-dom";
 import { PrivateRoute } from "./utils/PrivateRoute";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { addUserAction } from "./services/actions/userAction";
 
 class App extends Component {
-  state = {
-    user: null,
-  };
-
   componentDidMount() {
     const { auth, setUserUid } = this.context;
+    const { addUser } = this.props;
     auth.onAuthStateChanged((user) => {
-      console.log(user);
       if (user) {
         setUserUid(user.uid);
         localStorage.setItem("user", JSON.stringify(user.uid));
-        this.setState({ user });
+        addUser(user);
       } else {
         setUserUid(null);
         localStorage.removeItem("user");
-        this.setState({ user: false });
       }
     });
   }
 
   render() {
-    const { user } = this.state;
+    const { userUid, user } = this.props;
 
     if (user === null) {
       return (
@@ -83,4 +81,19 @@ class App extends Component {
 
 App.contextType = firebaseContext;
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    userUid: state.user.userUid,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      addUser: addUserAction,
+    },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

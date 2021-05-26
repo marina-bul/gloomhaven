@@ -1,17 +1,28 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+
+import { applyMiddleware, createStore } from "redux";
+import rootReducers from "./services/reducers";
+
+import firebaseContext from "./services/context/firebaseContext";
+import Firebase from "./services/firebase";
+
 import "./index.css";
 import "antd/dist/antd.css";
 import App from "./App";
-import firebaseContext from "./services/context/firebaseContext";
-import Firebase from "./services/firebase";
-import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import logger from "redux-logger";
+
+const store = new createStore(rootReducers, applyMiddleware(logger));
 
 ReactDOM.render(
-  <firebaseContext.Provider value={new Firebase()}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </firebaseContext.Provider>,
+  <Provider store={store}>
+    <firebaseContext.Provider value={new Firebase()}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </firebaseContext.Provider>
+  </Provider>,
   document.getElementById("root")
 );

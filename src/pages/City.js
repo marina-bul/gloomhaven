@@ -6,7 +6,7 @@ class ShopPage extends Component {
     return (
       <HeaderBlock
         title="Магазин"
-        descr="Здесь Вы можете купить или продать свое снаряжение"
+        descr="Здесь Вы можете купить или продать снаряжение"
         hideBackground
       />
     );
