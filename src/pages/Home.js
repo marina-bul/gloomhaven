@@ -11,7 +11,6 @@ import firebaseContext from "../services/context/firebaseContext";
 
 class HomePage extends Component {
   state = {
-    scenes: [],
     team: {
       name: "",
       users: [],
@@ -19,17 +18,7 @@ class HomePage extends Component {
   };
 
   componentDidMount() {
-    const { getTeamUsers, getScenes } = this.context;
-    getScenes()
-      .once("value")
-      .then((res) => {
-        this.setState(
-          {
-            scenes: res.val(),
-          }
-          // this.setNewScene
-        );
-      });
+    const { getTeamUsers } = this.context;
     getTeamUsers().on("value", (res) => {
       this.setState({
         team: res.val() || { name: "", users: [] },
@@ -62,7 +51,7 @@ class HomePage extends Component {
   };
 
   render() {
-    const { team, scenes } = this.state;
+    const { team } = this.state;
     return (
       <>
         <HeaderBlock
@@ -93,7 +82,7 @@ class HomePage extends Component {
             Более сотни приключений на любой вкус. Вместе мы сделаем Мрачную
             Гавань процветающим и безопасным местом!
           </Paragraph>
-          <CardContainer scenes={scenes} />
+          <CardContainer />
         </ContentBlock>
         <FooterBlock />
       </>

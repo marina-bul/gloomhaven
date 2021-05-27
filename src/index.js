@@ -13,8 +13,9 @@ import "antd/dist/antd.css";
 import App from "./App";
 import { Provider } from "react-redux";
 import logger from "redux-logger";
+import thunk from "redux-thunk";
 
-const store = new createStore(rootReducers, applyMiddleware(logger));
+const store = new createStore(rootReducers, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
   <Provider store={store}>
