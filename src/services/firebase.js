@@ -30,7 +30,7 @@ class Firebase {
 
   getScenes = () => this.database.ref("/scenes");
 
-  getTeamUsers = () => this.database.ref(`/team/${this.userUid}`);
+  getTeamUsers = () => this.database.ref(`/users`);
 }
 
 export default Firebase;

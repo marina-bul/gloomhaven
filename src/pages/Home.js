@@ -8,50 +8,21 @@ import HeaderBlock from "../components/HeaderBlock/HeaderBlock";
 import CardContainer from "../components/CardContainer/CardContainer";
 import TeamContainer from "../components/TeamContainer/TeamContainer";
 import firebaseContext from "../services/context/firebaseContext";
+import { connect } from "react-redux";
+import { fetchCardList } from "../services/actions/cardListAction";
+import { bindActionCreators } from "redux";
+import { fetchteamUsers } from "../services/actions/teamAction";
 
 class HomePage extends Component {
-  state = {
-    team: {
-      name: "",
-      users: [],
-    },
-  };
-
   componentDidMount() {
-    const { getTeamUsers } = this.context;
-    getTeamUsers().on("value", (res) => {
-      this.setState({
-        team: res.val() || { name: "", users: [] },
-      });
-    });
+    const { getTeamUsers, getScenes } = this.context;
+    const { fetchCardList, fetchTeamUsers } = this.props;
+    fetchTeamUsers(getTeamUsers);
+    fetchCardList(getScenes);
   }
 
-  deleteItemFunc = (id) => {
-    const { getTeamUsers } = this.context;
-    const stateArr = this.state.team.users;
-    const newStateArr = stateArr.filter((item) => item.id !== id);
-    debugger;
-    getTeamUsers().set({ users: newStateArr });
-  };
-
-  pushItemFunc = (item) => {
-    const { getTeamUsers } = this.context;
-    const { team, name, nation } = item;
-    const stateArr = this.state.team.users;
-
-    const newUser = {
-      id: +new Date(),
-      name: name,
-      nation: nation,
-    };
-    getTeamUsers().set({
-      name: team,
-      users: [...stateArr, newUser],
-    });
-  };
-
   render() {
-    const { team } = this.state;
+    const { users, scenes } = this.props;
     return (
       <>
         <HeaderBlock
@@ -65,7 +36,7 @@ class HomePage extends Component {
             члена отряда. Справа Вы можете увидеть текущий состав отряда.
           </Paragraph>
           <TeamContainer
-            team={team}
+            users={users}
             deleteItem={this.deleteItemFunc}
             handlePush={this.pushItemFunc}
           />
@@ -82,7 +53,7 @@ class HomePage extends Component {
             Более сотни приключений на любой вкус. Вместе мы сделаем Мрачную
             Гавань процветающим и безопасным местом!
           </Paragraph>
-          <CardContainer />
+          <CardContainer scenes={scenes} />
         </ContentBlock>
         <FooterBlock />
       </>
@@ -92,4 +63,21 @@ class HomePage extends Component {
 
 HomePage.contextType = firebaseContext;
 
-export default HomePage;
+const mapStateToProps = (state) => {
+  return {
+    users: state.teamUsers.payload || [],
+    scenes: state.cardList.payload || [],
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      fetchCardList: fetchCardList,
+      fetchTeamUsers: fetchteamUsers,
+    },
+    dispatch
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

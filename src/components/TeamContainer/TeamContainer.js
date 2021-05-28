@@ -1,56 +1,77 @@
 import React, { Component } from "react";
+import firebaseContext from "../../services/context/firebaseContext";
 import Character from "../Character/Character";
 
 import s from "./TeamContainer.module.css";
 
 class TeamContainer extends Component {
-  state = {
-    team: "",
-    name: "",
-    nation: "",
-  };
+  // handleInputChange1 = (e) => {
+  //   this.setState({
+  //     team: e.target.value,
+  //   });
+  // };
 
-  handle1InputChange = (e) => {
-    this.setState({
-      team: e.target.value,
-    });
-  };
+  // handleInputChange2 = (e) => {
+  //   this.setState({
+  //     name: e.target.value,
+  //   });
+  // };
 
-  handle2InputChange = (e) => {
-    this.setState({
-      name: e.target.value,
-    });
-  };
+  // handleInputChange3 = (e) => {
+  //   this.setState({
+  //     nation: e.target.value,
+  //   });
+  // };
 
-  handle3InputChange = (e) => {
-    this.setState({
-      nation: e.target.value,
-    });
-  };
+  // handleOnSubmit = (e) => {
+  //   e.preventDefault();
+  //   this.props.handlePush(this.state);
+  // };
 
-  handleOnSubmit = (e) => {
-    e.preventDefault();
-    this.props.handlePush(this.state);
-  };
+  // deleteItemFunc = (id) => {
+  //   const { getTeamUsers } = this.context;
+  //   const stateArr = this.props.users;
+  //   const newStateArr = stateArr.filter((item) => item.id !== id);
+  //   getTeamUsers().set({ users: newStateArr });
+  // };
+
+  // pushItemFunc = (item) => {
+  //   const { getTeamUsers } = this.context;
+  //   const { team, name, nation } = item;
+  //   const stateArr = this.state.team.users;
+
+  //   const newUser = {
+  //     id: +new Date(),
+  //     name: name,
+  //     nation: nation,
+  //   };
+  //   getTeamUsers().set({
+  //     name: team,
+  //     users: [...stateArr, newUser],
+  //   });
+  // };
 
   render() {
-    const { team } = this.props;
+    const { users } = this.props;
+    console.log("users", users);
+    debugger;
+
     return (
       <div className={s.wrapper}>
         <div className={s.data}>
           <form onSubmit={this.handleOnSubmit}>
             <label>Введите название отряда:</label>
-            <input type="text" onChange={this.handle1InputChange} />
+            <input type="text" onChange={this.handleInputChange1} />
             <label>Введите имя персонажа:</label>
-            <input type="text" onChange={this.handle2InputChange} />
+            <input type="text" onChange={this.handleInputChange2} />
             <label>Введите расу персонажа:</label>
-            <input type="text" onChange={this.handle3InputChange} />
+            <input type="text" onChange={this.handleInputChange3} />
             <button className={s.btn}>OK</button>
           </form>
         </div>
         <div className={s.team}>
-          <h3>{team.name}</h3>
-          {team.users.map(({ id, name, nation }) => {
+          {/* <h3>{team.name}</h3> */}
+          {users.map(({ id, name, nation }) => {
             return (
               <Character
                 key={id}
@@ -68,5 +89,7 @@ class TeamContainer extends Component {
     );
   }
 }
+
+TeamContainer.contextType = firebaseContext;
 
 export default TeamContainer;
