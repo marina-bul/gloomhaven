@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import firebaseContext from "../../services/context/firebaseContext";
-import Character from "../Character/Character";
+import Character from "./Character/Character";
 
 import s from "./TeamContainer.module.css";
 
@@ -89,7 +88,5 @@ class TeamContainer extends Component {
     );
   }
 }
-
-TeamContainer.contextType = firebaseContext;
 
 export default TeamContainer;

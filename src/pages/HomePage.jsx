@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 import ContentBlock from "../components/ContentBlock/ContentBlock";
 import Header from "../components/ContentBlock/Header/Header";
@@ -7,22 +7,20 @@ import FooterBlock from "../components/FooterBlock/FooterBlock";
 import HeaderBlock from "../components/HeaderBlock/HeaderBlock";
 import CardContainer from "../components/CardContainer/CardContainer";
 import TeamContainer from "../components/TeamContainer/TeamContainer";
-import firebaseContext from "../services/context/firebaseContext";
 import { connect } from "react-redux";
 import { fetchCardList } from "../services/actions/cardListAction";
 import { bindActionCreators } from "redux";
 import { fetchteamUsers } from "../services/actions/teamAction";
 
-class HomePage extends Component {
-  componentDidMount() {
-    const { getTeamUsers, getScenes } = this.context;
-    const { fetchCardList, fetchTeamUsers } = this.props;
-    fetchTeamUsers(getTeamUsers);
-    fetchCardList(getScenes);
-  }
+const HomePage = () => {
+  // componentDidMount() {
+  //   const { getTeamUsers, getScenes } = this.context;
+  //   const { fetchCardList, fetchTeamUsers } = this.props;
+  //   fetchTeamUsers(getTeamUsers);
+  //   fetchCardList(getScenes);
+  // }
 
-  render() {
-    const { users, scenes } = this.props;
+    // const { users, scenes } = this.props;
     return (
       <>
         <HeaderBlock
@@ -35,11 +33,11 @@ class HomePage extends Component {
             В полях слева напишите название отряда, а также имя и расу каждого
             члена отряда. Справа Вы можете увидеть текущий состав отряда.
           </Paragraph>
-          <TeamContainer
+          {/* <TeamContainer
             users={users}
             deleteItem={this.deleteItemFunc}
             handlePush={this.pushItemFunc}
-          />
+          /> */}
         </ContentBlock>
         <HeaderBlock
           title="Краткая историческая справка"
@@ -53,15 +51,13 @@ class HomePage extends Component {
             Более сотни приключений на любой вкус. Вместе мы сделаем Мрачную
             Гавань процветающим и безопасным местом!
           </Paragraph>
-          <CardContainer scenes={scenes} />
+          {/* <CardContainer scenes={scenes} /> */}
         </ContentBlock>
         <FooterBlock />
       </>
     );
   }
-}
 
-HomePage.contextType = firebaseContext;
 
 const mapStateToProps = (state) => {
   return {

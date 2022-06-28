@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 
-import firebaseContext from "../../services/context/firebaseContext";
-import Card from "../Card/Card";
+import Card from "./Card/Card";
 import s from "./CardContainer.module.css";
 
 class CardContainer extends Component {
   render() {
     const { scenes } = this.props;
-    debugger;
 
     return (
       <div className={s.cardWrapper}>
@@ -18,7 +16,5 @@ class CardContainer extends Component {
     );
   }
 }
-
-CardContainer.contextType = firebaseContext;
 
 export default CardContainer;
