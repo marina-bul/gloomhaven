@@ -11,16 +11,10 @@ import { connect } from "react-redux";
 import { fetchCardList } from "../services/actions/cardListAction";
 import { bindActionCreators } from "redux";
 import { fetchteamUsers } from "../services/actions/teamAction";
+ 
+const HomePage = (props) => {
 
-const HomePage = () => {
-  // componentDidMount() {
-  //   const { getTeamUsers, getScenes } = this.context;
-  //   const { fetchCardList, fetchTeamUsers } = this.props;
-  //   fetchTeamUsers(getTeamUsers);
-  //   fetchCardList(getScenes);
-  // }
-
-    // const { users, scenes } = this.props;
+    const { users, scenes } = props;
     return (
       <>
         <HeaderBlock
@@ -33,11 +27,11 @@ const HomePage = () => {
             В полях слева напишите название отряда, а также имя и расу каждого
             члена отряда. Справа Вы можете увидеть текущий состав отряда.
           </Paragraph>
-          {/* <TeamContainer
+          <TeamContainer
             users={users}
-            deleteItem={this.deleteItemFunc}
-            handlePush={this.pushItemFunc}
-          /> */}
+            // deleteItem={this.deleteItemFunc}
+            // handlePush={this.pushItemFunc}
+          />
         </ContentBlock>
         <HeaderBlock
           title="Краткая историческая справка"
@@ -51,7 +45,7 @@ const HomePage = () => {
             Более сотни приключений на любой вкус. Вместе мы сделаем Мрачную
             Гавань процветающим и безопасным местом!
           </Paragraph>
-          {/* <CardContainer scenes={scenes} /> */}
+          <CardContainer scenes={scenes} />
         </ContentBlock>
         <FooterBlock />
       </>
@@ -61,8 +55,8 @@ const HomePage = () => {
 
 const mapStateToProps = (state) => {
   return {
-    users: state.teamUsers.payload || [],
-    scenes: state.cardList.payload || [],
+    users: state.teamUsers.users,
+    scenes: state.cardList,
   };
 };
 

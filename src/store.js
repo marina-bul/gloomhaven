@@ -7,6 +7,22 @@ export const store = {
   ],
   team: {
     name: "",
-    users: [],
+    users: [
+      {
+        id: 1,
+        name: "Роланд",
+        nation: "Инокс-варвар",
+      },
+      {
+        id: 2,
+        name: "Крис",
+        nation: "Вермлинг",
+      },
+      {
+        id: 3,
+        name: "Йен",
+        nation: "Орхид-чародей",
+      },
+    ],
   },
 };

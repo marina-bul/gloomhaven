@@ -30,10 +30,10 @@ class RegistrPage extends Component {
                 onFinishFailed={this.onFinishFailed}
               >
                 <Form.Item
-                  label="Адрес эл.почты"
-                  name="email"
+                  label="Название команды"
+                  name="name"
                   rules={[
-                    { required: true, message: "Please input your email!" },
+                    { required: true, message: "Please input team name!" },
                   ]}
                 >
                   <Input />

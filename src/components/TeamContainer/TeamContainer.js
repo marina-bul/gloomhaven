@@ -4,12 +4,6 @@ import Character from "./Character/Character";
 import s from "./TeamContainer.module.css";
 
 class TeamContainer extends Component {
-  // handleInputChange1 = (e) => {
-  //   this.setState({
-  //     team: e.target.value,
-  //   });
-  // };
-
   // handleInputChange2 = (e) => {
   //   this.setState({
   //     name: e.target.value,
@@ -52,15 +46,11 @@ class TeamContainer extends Component {
 
   render() {
     const { users } = this.props;
-    console.log("users", users);
-    debugger;
 
     return (
       <div className={s.wrapper}>
         <div className={s.data}>
           <form onSubmit={this.handleOnSubmit}>
-            <label>Введите название отряда:</label>
-            <input type="text" onChange={this.handleInputChange1} />
             <label>Введите имя персонажа:</label>
             <input type="text" onChange={this.handleInputChange2} />
             <label>Введите расу персонажа:</label>
